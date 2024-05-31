@@ -1,30 +1,28 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 
-export function Header(){
+export function Header() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div className="container-fluid">
-        <Link className="navbar-brand text-white" to="/">Examen UF4</Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav mx-auto">
-            <li className="nav-item">
-              <Link className="nav-link text-white px-3" to="/">Home</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-white px-3" to="/about">About</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-white px-3" to="/porsi">Porsi</Link>
-            </li>
-          </ul>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="collapse navbar-collapse d-flex justify-content-center align-items-center" id="navbarSupportedContent">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item active">
+              <div className="text-dark text-xl p-3 hover:text-gray-400">Gestió d'incidències FPLLEFIA</div>
+          </li>
+        </ul>
+        <div className="ps-2">
+          <Link to="/panel" className="btn btn-outline-success my-2 my-sm-0">Panel</Link>
+        </div>
+        <div className="ps-2">
+          <Link to="/registro" className="btn btn-outline-success my-2 my-sm-0">Registro</Link>
+        </div>
+        <div className="ps-2">
+          <Link to="/login" className="btn btn-outline-success my-2 my-sm-0">Login</Link>
         </div>
       </div>
-        
     </nav>
   );
-};
+}
+
+
