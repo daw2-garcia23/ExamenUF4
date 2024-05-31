@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export function TablaPendientes(){
+export function TablaPendientes() {
   const [ticketsData, setTicketsData] = useState([]);
 
   useEffect(() => {
@@ -8,7 +8,8 @@ export function TablaPendientes(){
       .then(response => response.json())
       .then(data => {
         const pendientes = data.ticketsPendientes;
-        setTicketsData(pendientes);
+        const ticketsOrdnadosPendientes = pendientes.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+        setTicketsData(ticketsOrdnadosPendientes);
       })
       .catch(error => console.error('Error:', error));
   }, []);

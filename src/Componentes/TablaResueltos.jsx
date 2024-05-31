@@ -8,7 +8,8 @@ export function TablaResueltos(){
       .then(response => response.json())
       .then(data => {
         const resueltos = data.ticketsResueltos;
-        setTicketsData(resueltos);
+        const ticketsOrdnadosResueltos = resueltos.sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
+        setTicketsData(ticketsOrdnadosResueltos);
       })
       .catch(error => console.error('Error:', error));
   }, []);
