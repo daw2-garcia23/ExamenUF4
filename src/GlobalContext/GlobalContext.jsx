@@ -6,8 +6,8 @@ export const GlobalContext = createContext();
 export function GlobalContextProvider({ children }) {
   const [contadorClicks, setContadorClicks] = useState(0); //esto es de otra prácitca
   //He decidido crear dos tipos de estados, porque creo que me voy a manejar mejor entre tickets pendientes y tickets resueltos
-  const [ticketsPendientes, setTicketsPendientes] = useState(bd.ticketsPendientes); 
-  const [ticketsResueltos, setTicketsResueltos] = useState(bd.ticketsResueltos);
+  const [ticketsPendientes, setTicketsPendientes] = useState(); 
+  const [ticketsResueltos, setTicketsResueltos] = useState();
 
   function clicks() {
     setContadorClicks(contadorClicks + 1);
