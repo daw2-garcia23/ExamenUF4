@@ -1,8 +1,17 @@
-import React, { useContext } from 'react';
-import { GlobalContext } from '../GlobalContext/GlobalContext';
+import React, { useState, useEffect } from 'react';
 
 export function TablaResueltos(){
-  const { ticketsResueltos } = useContext(GlobalContext);
+    const [ticketsData, setTicketsData] = useState([]);
+
+  useEffect(() => {
+    fetch('https://json-rho-olive.vercel.app/tickets')
+      .then(response => response.json())
+      .then(data => {
+        const resueltos = data.ticketsResueltos;
+        setTicketsData(resueltos);
+      })
+      .catch(error => console.error('Error:', error));
+  }, []);
 
   return (
     <table className="table mt-4">
@@ -21,7 +30,7 @@ export function TablaResueltos(){
         </tr>
       </thead>
       <tbody>
-        {ticketsResueltos.map((ticket, index) => (
+        {ticketsData.map((ticket, index) => (
           <tr key={index}>
             <td>{ticket.codigo}</td>
             <td>{ticket.fecha}</td>
@@ -33,12 +42,12 @@ export function TablaResueltos(){
             <td>{ticket.alumno}</td>
             <td>
               <button className="btn btn-info" title="Ver comentarios">
-                <i className="bi bi-chat-left-text"></i>
+                <i className="bi bi-chat-left-text">Comentarios</i>
               </button>
             </td>
             <td>
               <button className="btn btn-danger" title="Eliminar ticket">
-                <i className="bi bi-trash3"></i>
+                <i className="bi bi-trash3">Eliminar</i>
               </button>
             </td>
           </tr>

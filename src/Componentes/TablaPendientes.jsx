@@ -1,8 +1,17 @@
-import React, { useContext } from 'react';
-import { GlobalContext } from '../GlobalContext/GlobalContext';
+import React, { useState, useEffect } from 'react';
 
 export function TablaPendientes(){
-  const { ticketsPendientes } = useContext(GlobalContext);
+  const [ticketsData, setTicketsData] = useState([]);
+
+  useEffect(() => {
+    fetch('https://json-rho-olive.vercel.app/tickets')
+      .then(response => response.json())
+      .then(data => {
+        const pendientes = data.ticketsPendientes;
+        setTicketsData(pendientes);
+      })
+      .catch(error => console.error('Error:', error));
+  }, []);
 
   return (
     <table className="table mt-4">
@@ -22,7 +31,7 @@ export function TablaPendientes(){
         </tr>
       </thead>
       <tbody>
-        {ticketsPendientes.map((ticket, index) => (
+        {ticketsData.map((ticket, index) => (
           <tr key={index}>
             <td>{ticket.codigo}</td>
             <td>{ticket.fecha}</td>
@@ -34,17 +43,17 @@ export function TablaPendientes(){
             <td><button className="btn btn-success" title="Resolver ticket">Resolver</button></td>
             <td>
               <button className="btn btn-warning" title="Añadir comentario">
-                <i className="bi bi-pencil" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                <i className="bi bi-pencil" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</i>
               </button>
             </td>
             <td>
               <button className="btn btn-info" title="Ver comentarios">
-                <i className="bi bi-chat-left-text"></i>
+                <i className="bi bi-chat-left-text">Comentarios</i>
               </button>
             </td>
             <td>
               <button className="btn btn-danger" title="Eliminar ticket">
-                <i className="bi bi-trash3"></i>
+                <i className="bi bi-trash3">Eliminar</i>
               </button>
             </td>
           </tr>
@@ -53,4 +62,3 @@ export function TablaPendientes(){
     </table>
   );
 }
-
